@@ -20,14 +20,14 @@ LIMIT 20;
 #2.3 Retrieve rental information and add an additional column called DAY_TYPE with values 'weekend' or 'workday', depending on the day of the week. Hint: use a conditional expression.
 SELECT rental_id, rental_date,
        CASE 
-           WHEN DAYOFWEEK(rental_date) IN (1, 5) THEN 'workday'
+           WHEN DAYOFWEEK(rental_date)<6 THEN 'workday'
            ELSE 'weekend'
        END AS DAY_TYPE
 FROM rental;
 
 #3. Retrieve null values and replace with not available, then sort in ascending order the film titles. 
 
-SELECT title, COALESCE(rental_duration, 'Not Available') AS rental_duration
+SELECT title, ifnull(rental_duration, 'Not Available') AS rental_duration
 FROM film
 ORDER BY title ASC;
 
